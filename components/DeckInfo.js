@@ -3,16 +3,24 @@ import { connect } from 'react-redux';
 import { View, Text } from 'react-native';
 
 import DeckDetail from './DeckDetail';
+import Button from './Button' ;
 
 class DeckInfo extends Component{
     static navigationOptions = () => {
         return {
-            // headerTransparent: true,
-            headerMode: 'none',
-            // headerStyle: {
-            //     height: 0
-            // }
+            headerMode: 'none'
         }
+    }
+
+    addCard = () => {
+        this.props.navigation.navigate(
+            'NewCard',
+            { deckId: this.props.deck.title }
+        );
+    }
+
+    startQuiz = () => {
+
     }
 
     render(){
@@ -20,6 +28,16 @@ class DeckInfo extends Component{
         return (
             <View>
                 <DeckDetail item={deck}/>
+                <Button 
+                    title="Add Card"
+                    onPress={this.addCard}
+                    block
+                    />
+                <Button 
+                    title="Start Quiz"
+                    onPress={this.startQuiz}
+                    block
+                    />
             </View>
         )
     }
