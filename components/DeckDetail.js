@@ -3,32 +3,34 @@ import { View, Text, StyleSheet } from 'react-native';
 
 import { textPrimaryColor, textSecondaryColor, borderColor } from '../utils/colors';
 
-export default ({ item }) => (
-    <View style={styles.deck}>
-        <Text style={styles.deckName}>{item.title}</Text>
-        <Text style={styles.deckCount}>{item.countCards} cards</Text>
-    </View>
-)
+export default ({ item, customStyle }) => {
+    if(customStyle){
+        styles.container = { ...styles.container, ...customStyle.container };
+        styles.title = { ...styles.title, ...customStyle.title };
+        styles.subtitle = { ...styles.subtitle, ...customStyle.subtitle };
+    }
+    return(
+        <View style={styles.container}>
+            <Text style={styles.title}>{item.title}</Text>
+            <Text style={styles.subtitle}>{item.cards.length} cards</Text>
+        </View>
+    )
+}
 
-const styles = StyleSheet.create({
+let styles = StyleSheet.create({
     container: {
-        flex: 1, 
-        flexDirection: 'row',
-        alignItems: 'flex-start'
-    },
-    deck: {
-        height: 120,
-        backgroundColor: '#fff',
         alignItems: 'center',
-        justifyContent: 'center',
-        borderBottomWidth: 1,
-        borderColor: borderColor
+        paddingTop: 20,
+        paddingBottom: 20,
+        borderColor: borderColor,
+        borderBottomWidth: 1
     },
-    deckName: {
+    title: {
         fontSize: 20,
-        color: textPrimaryColor
+        color: textPrimaryColor,
+        marginBottom: 2
     },
-    deckCount: {
+    subtitle: {
         fontSize: 12,
         color: textSecondaryColor
     }

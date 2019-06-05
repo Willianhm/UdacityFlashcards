@@ -18,7 +18,7 @@ export default class App extends React.Component {
     return (
       <Provider store={store}>
         <View style={styles.container}>
-          <FlashCardStatusBar backgroundColor={purple} barStyle="light-content" />
+          {/* <FlashCardStatusBar backgroundColor={purple}/> */}
           <MainNavigator  />
         </View>
       </Provider>

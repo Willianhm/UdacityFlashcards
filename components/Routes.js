@@ -2,16 +2,17 @@ import React from 'react';
 import { createAppContainer, createBottomTabNavigator, createStackNavigator } from 'react-navigation';
 import { Entypo } from '@expo/vector-icons'
 
-import { white, purple, primaryColor } from '../utils/colors';
-import Deck from './Deck';
+import { white, primaryColor } from '../utils/colors';
+import Decks from './Decks';
 import NewDeck from './NewDeck';
 import DeckInfo from './DeckInfo';
+import AddCard from './AddCard';
 
 const Tabs = createBottomTabNavigator({
-    Deck: {
-        screen: Deck,
+    Decks: {
+        screen: Decks,
         navigationOptions: {
-            tabBarLabel: 'Deck',
+            tabBarLabel: 'Decks',
             tabBarIcon: ({ tintColor }) => <Entypo name='list' size={25} color={tintColor} />
         }
     },
@@ -23,25 +24,30 @@ const Tabs = createBottomTabNavigator({
         }
     }
 }, {
-    navigationOptions: {
-        header: null
-    },
-    tabBarOptions: {
-        activeTintColor: primaryColor,
-        style: {
-            backgroundColor: white,
+        navigationOptions: {
+            header: null
         },
-        labelStyle: {
-            color: '#8E8E8E'
+        tabBarOptions: {
+            activeTintColor: primaryColor,
+            style: {
+                backgroundColor: white,
+            },
+            labelStyle: {
+                color: '#8E8E8E'
+            }
         }
-    }
-});
+    });
 
 const MainNavigator = createStackNavigator({
     Home: Tabs,
-    DeckInfo: DeckInfo 
+    DeckInfo: DeckInfo,
+    AddCard: AddCard
 }, {
-    headerMode: 'screen'
+    defaultNavigationOptions: {
+        headerStyle: {
+            backgroundColor: 'transparent'
+        }
+    }
 });
 
 

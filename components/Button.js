@@ -2,31 +2,29 @@ import React from 'react';
 import { TouchableOpacity, Text, StyleSheet } from 'react-native';
 import { white, purple, primaryColor } from '../utils/colors';
 
-export default function Button({ title, onPress, block }) {
+export default function Button({ title, onPress, customStyle, outline }) {
     return (
         <TouchableOpacity
-            style={[styles.button, block ? {flex: 1} : null ]}
+            style={[styles.button, customStyle, outline ? styles.outline : null ]}
             onPress={onPress}>
-            <Text style={styles.text}>{title}</Text>
+            <Text style={{ color: outline ? primaryColor : white }}>{title}</Text>
         </TouchableOpacity>
     )
 }
 
 const styles = StyleSheet.create({
     button: {
-        backgroundColor: white,
+        backgroundColor: primaryColor,
         padding: 10,
         paddingLeft: 30,
         paddingRight: 30,
         height: 45,
         borderRadius: 2,
-        alignSelf: 'flex-end',
-        justifyContent: 'center',
         alignItems: 'center',
         borderWidth: 1,
         borderColor: primaryColor
     },
-    text: {
-        color: primaryColor
+    outline: {
+        backgroundColor: white,
     }
 });

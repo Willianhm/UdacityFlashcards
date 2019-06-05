@@ -13,19 +13,19 @@ class Deck extends Component {
         this.props.getDecks();
     }
 
-    goToDeckDetail = (title) => {
+    goToDeckDetail = (id) => {
         this.props.navigation.navigate(
             'DeckInfo',
-            { deckId: title }
+            { deckId: id }
         );
     }
 
-    _keyExtractor = (item) => item.title;
+    _keyExtractor = (item) => item.id.toString();
 
     renderItem = ({ item }) => {
         return (
-            <TouchableOpacity onPress={() => this.goToDeckDetail(item.title)}>
-                <DeckDetail item={item} />
+            <TouchableOpacity onPress={() => this.goToDeckDetail(item.id)}>
+                <DeckDetail item={item} showBorderBottom />
             </TouchableOpacity>
         )
     };
@@ -62,7 +62,6 @@ export default connect(mapStateToProps, mapDispatchToProps)(Deck);
 const styles = StyleSheet.create({
     container: {
         flex: 1, 
-        flexDirection: 'row',
-        alignItems: 'flex-start'
+        alignItems: 'stretch'
     }
 });

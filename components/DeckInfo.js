@@ -1,21 +1,15 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { View, Text } from 'react-native';
+import { View, StyleSheet } from 'react-native';
 
 import DeckDetail from './DeckDetail';
-import Button from './Button' ;
+import Button from './Button';
 
-class DeckInfo extends Component{
-    static navigationOptions = () => {
-        return {
-            headerMode: 'none'
-        }
-    }
-
+class DeckInfo extends Component {
     addCard = () => {
         this.props.navigation.navigate(
-            'NewCard',
-            { deckId: this.props.deck.title }
+            'AddCard',
+            { deckId: this.props.deck.id }
         );
     }
 
@@ -23,21 +17,26 @@ class DeckInfo extends Component{
 
     }
 
-    render(){
+    render() {
         const { deck } = this.props;
         return (
-            <View>
-                <DeckDetail item={deck}/>
-                <Button 
-                    title="Add Card"
-                    onPress={this.addCard}
-                    block
+            <View style={styles.container}>
+                <View style={{ flex: 2, justifyContent: 'center' }}>
+                    <DeckDetail item={deck} customStyle={deckDetailStyle} />
+                </View>
+                <View style={{ flex: 1 }}>
+                    <Button
+                        title="Add Card"
+                        onPress={this.addCard}
+                        customStyle={{ marginBottom: 10 }}
+                        outline
                     />
-                <Button 
-                    title="Start Quiz"
-                    onPress={this.startQuiz}
-                    block
+                    <Button
+                        title="Start Quiz"
+                        onPress={this.startQuiz}
+                        block
                     />
+                </View>
             </View>
         )
     }
@@ -46,8 +45,31 @@ class DeckInfo extends Component{
 const mapStateToProps = ({ deck }, { navigation }) => {
     const { deckId } = navigation.state.params;
     return {
-        deck : deck.length ? deck.filter(d => d.title === deckId)[0] : {}
+        deck: deck.length ? { ...deck.filter(d => d.id === deckId)[0] } : {}
     }
 }
 
 export default connect(mapStateToProps)(DeckInfo);
+
+const styles = StyleSheet.create({
+    container: {
+        flex: 1,
+        alignItems: 'stretch',
+        justifyContent: 'center',
+        paddingLeft: 20,
+        paddingRight: 20
+    }
+});
+
+
+const deckDetailStyle = StyleSheet.create({
+    container: {
+        borderBottomWidth: 0
+    },
+    title: {
+        fontSize: 30
+    },
+    subtitle: {
+        fontSize: 20
+    }
+});

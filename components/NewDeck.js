@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { View, Text, StyleSheet, TextInput, KeyboardAvoidingView } from 'react-native';
+import { Text, StyleSheet, TextInput, KeyboardAvoidingView, Alert } from 'react-native';
 
 import { addDeck } from '../actions/deck';
 
@@ -10,12 +10,22 @@ import Button from './Button';
 class NewDeck extends Component{
     state = {
         title: ''
-    }
+    };
 
     save = () => {
         const { title } = this.state;
-        this.props.addDeck(title);
-        this.setState(({ title: '' }));
+        if(!title){
+            Alert.alert('Title is required', 'You need to describe a title for the deck.', [{ text: 'Close' }]);
+        }else{
+            const { addDeck, navigation } = this.props; 
+            this.setState(({ title: '' }));
+            addDeck(title).then((id) => {
+                navigation.navigate(
+                    'DeckInfo',
+                    { deckId: id }
+                );
+            });
+        }   
     }
 
     render(){
@@ -23,20 +33,17 @@ class NewDeck extends Component{
         return(
             <KeyboardAvoidingView behavior='padding' style={styles.container}>
                 <Text style={styles.title}>What is the title of your new deck?</Text>
-                <View style={styles.inputContainer}>
-                    <TextInput 
-                        style={styles.input}
-                        value={title}
-                        onChangeText={text => this.setState({ title: text })}
-                        />
-                </View>
-                <View style={styles.inputContainer}>
-                    <Button 
-                        title="Save"
-                        block
-                        onPress={this.save}
-                        />
-                </View>
+                <TextInput 
+                    autoFocus
+                    style={styles.input}
+                    value={title}
+                    onChangeText={text => this.setState({ title: text })}
+                    />
+                <Button 
+                    title="Save"
+                    onPress={this.save}
+                    outline
+                    />
             </KeyboardAvoidingView>
         )
     }
@@ -50,11 +57,10 @@ const mapDispatchToProps = dispatch => {
 
 export default connect(null, mapDispatchToProps)(NewDeck);
 
-
 const styles = StyleSheet.create({
     container: {
         flex: 1, 
-        alignItems: 'center',
+        alignItems: 'stretch',
         justifyContent: 'center',
         padding: 20
     },
@@ -63,20 +69,10 @@ const styles = StyleSheet.create({
         textAlign: 'center',
         color: textPrimaryColor
     },
-    inputContainer: {
-        flexDirection: 'row'
-    },
     input: {
-        flex: 1,
         borderBottomWidth: 1,
         borderColor: borderColor,
         marginTop: 20,
-        marginBottom: 20,
-        marginLeft: 35,
-        marginRight: 35
-    },
-    button: {
-        flex: 1,
-        fontSize: 12
+        marginBottom: 10
     }
 });
