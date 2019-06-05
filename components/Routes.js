@@ -7,6 +7,7 @@ import Decks from './Decks';
 import NewDeck from './NewDeck';
 import DeckInfo from './DeckInfo';
 import AddCard from './AddCard';
+import Quiz from './Quiz';
 
 const Tabs = createBottomTabNavigator({
     Decks: {
@@ -39,9 +40,10 @@ const Tabs = createBottomTabNavigator({
     });
 
 const MainNavigator = createStackNavigator({
-    Home: Tabs,
-    DeckInfo: DeckInfo,
-    AddCard: AddCard
+    Home:       Tabs,
+    DeckInfo:   DeckInfo,
+    AddCard:    AddCard,
+    Quiz:       Quiz
 }, {
     defaultNavigationOptions: {
         headerStyle: {

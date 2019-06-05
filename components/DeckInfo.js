@@ -6,15 +6,11 @@ import DeckDetail from './DeckDetail';
 import Button from './Button';
 
 class DeckInfo extends Component {
-    addCard = () => {
+     navigate = (route) => {
         this.props.navigation.navigate(
-            'AddCard',
+            route,
             { deckId: this.props.deck.id }
         );
-    }
-
-    startQuiz = () => {
-
     }
 
     render() {
@@ -27,13 +23,13 @@ class DeckInfo extends Component {
                 <View style={{ flex: 1 }}>
                     <Button
                         title="Add Card"
-                        onPress={this.addCard}
+                        onPress={() => { this.navigate('AddCard') }}
                         customStyle={{ marginBottom: 10 }}
                         outline
                     />
                     <Button
                         title="Start Quiz"
-                        onPress={this.startQuiz}
+                        onPress={() => { this.navigate('Quiz') }}
                         block
                     />
                 </View>
