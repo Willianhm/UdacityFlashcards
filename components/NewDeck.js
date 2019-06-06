@@ -42,7 +42,6 @@ class NewDeck extends Component{
                 <Button 
                     title="Save"
                     onPress={this.save}
-                    outline
                     />
             </KeyboardAvoidingView>
         )

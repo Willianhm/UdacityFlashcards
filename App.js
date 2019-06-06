@@ -10,15 +10,20 @@ import { purple } from './utils/colors';
 import FlashCardStatusBar from './components/FlashCardStatusBar';
 import MainNavigator from './components/Routes';
 
+import { setLocalNotification } from './utils/helpers';
 
 const store = createStore(reducer, middleware);
 
 export default class App extends React.Component {
+  componentDidMount(){
+    setLocalNotification();
+  }
+
   render() {
     return (
       <Provider store={store}>
         <View style={styles.container}>
-          {/* <FlashCardStatusBar backgroundColor={purple}/> */}
+          <FlashCardStatusBar backgroundColor={purple}/>
           <MainNavigator  />
         </View>
       </Provider>
