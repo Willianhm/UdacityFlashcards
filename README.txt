@@ -7,6 +7,7 @@ This project was tested in Android device.
 To get started developing right away:
 
 * Install dependencies:
-    - cd UdacityFlashcards
+    - `npm install -g expo-cli`
+    - `cd UdacityFlashcards`
     - `npm install`
     - `npm start`
