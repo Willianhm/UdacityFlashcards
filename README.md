@@ -11,3 +11,9 @@ To get started developing right away:
     - `cd UdacityFlashcards`
     - `npm install`
     - `npm start`
+    
+## Deploy
+ To run the app on your Android Device, you need to download the Expo App from the store: 
+ https://play.google.com/store/apps/details?id=host.exp.exponent&hl=pt_BR
+ 
+ Then, open the Expo App and scan the QRCode from web page application.
